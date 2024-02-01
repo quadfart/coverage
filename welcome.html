@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="welcome-main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map with Inputs</title>
+    <style>
+        #floating-panel-slider {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        #slider1, #slider2 {
+            width: 200px;
+            margin-bottom: 15px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #map {
+            flex: 1;
+        }
+
+        #floating-panel {
+            position: absolute;
+            top: 30%;
+            right: 0;
+            padding: 10px;
+            background-color: white;
+            z-index: 5;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+<div id="floating-panel">
+    <label for="lat">Latitude:</label>
+    <input type="text" id="lat" placeholder="Enter Latitude">
+    <br>
+    <label for="lng">Longitude:</label>
+    <input type="text" id="lng" placeholder="Enter Longitude">
+    <br>
+    <label for="antenna-height">Antenna Height:</label>
+    <input type="text" id="antenna-height" placeholder="Enter Antenna Height">
+    <br>
+    <label for="rf-range">RF Range:</label>
+    <input type="text" id="rf-range" placeholder="Enter RF Range(METERS)">
+    <br>
+    <label for="flight-altitude">Flight Altitude:</label>
+    <input type="text" id="flight-altitude" placeholder="Enter Flight Altitude(FT)">
+    <br>
+    <button onclick="setInputs()">Confirm</button>
+    <i>If all set===></i>
+    <a href="index.html">Calculate!</a>
+</div>
+<div id="floating-panel-slider">
+    <label for="slider1">Path Resolution         :</label>
+    <input type="range" id="slider1" min="10" max="2560" value="10">
+    <div id="slider1-value">Value: 10</div>
+    <br>
+    <label for="slider2">Circumference Resolution:</label>
+    <input type="range" id="slider2" min="3" max="360" value="5">
+    <div id="slider2-value">Value: 5</div>
+    <div id="slider-values"></div>
+
+</div>
+<script>
+    // Get the sliders and their value display elements
+    var slider1 = document.getElementById('slider1');
+    var slider1Value = document.getElementById('slider1-value');
+    var slider2 = document.getElementById('slider2');
+    var slider2Value = document.getElementById('slider2-value');
+
+    // Update the displayed values when the sliders change
+    slider1.addEventListener('input', function() {
+        slider1Value.textContent = 'Value: ' + slider1.value;
+    });
+
+    slider2.addEventListener('input', function() {
+        slider2Value.textContent = 'Value: ' + slider2.value;
+    });
+</script>
+<!-- Include the Google Maps API script -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRhp90bl029QoEDBnoBsCRDfxMDoRSxww&callback=initMap">
+</script>
+</body>
+</html>
